@@ -1,11 +1,9 @@
 FROM php:7.2.12-fpm
 
 # Install modules
-RUN buildDeps="libpq-dev libzip-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libgmp-dev git openssh-client vim " \
+RUN buildDeps="libpq-dev libzip-dev " \
     && apt-get update && apt-get install -y $buildDeps --no-install-recommends \
-    && docker-php-ext-install -j$(nproc) iconv \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install pdo_pgsql pgsql gd
+    && docker-php-ext-install pdo_pgsql pgsql
 
 RUN curl -sSL https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
