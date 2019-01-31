@@ -17,6 +17,7 @@ class ProcessTaxController extends Controller
     public function processAction(Request $request, TaxProcess $tax, Employee $employee)
     {
         $result = [];
+
         foreach ($request->get('employees') as $id) {
             $result['EmployeeId: ' . $id] = $tax->process($employee->getEmployee($id));
         }
